@@ -56,10 +56,22 @@
       transform: scale(0.95);
       transition: transform 0.1s ease;
     }
+
+    /* Стили для названия игры */
+    .game-title {
+      font-size: 48px;
+      color: #336699;
+      font-weight: bold;
+      margin-bottom: 40px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
   </style>
 </head>
 <body>
   <div class="police-stripes"></div>
+
+  <!-- Название игры -->
+  <h1 class="game-title">Полицейский мир</h1>
 
   <div class="button-container">
     <button onclick="openStoryChoices()">Сюжет</button>
