@@ -71,9 +71,31 @@
       z-index: 1; /* Чтобы текст был над фоном */
       pointer-events: none; /* Чтобы клики проходили сквозь текст */
     }
+
+    /* Стили для кнопки "Вернуться назад" */
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #336699;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #003366;
+    }
   </style>
 </head>
 <body>
+  <!-- Кнопка "Вернуться назад" -->
+  <button class="back-button" onclick="goBack()">Вернуться назад</button>
+
   <div class="story-choice-container">
     <div class="story-choice soon" onclick="startStory('story1')">Сюжет 1</div>
     <div class="story-choice soon" onclick="startStory('story2')">Сюжет 2</div>
@@ -85,6 +107,10 @@
       alert("Начинаем " + storyId); // Заменить на реальный код для запуска сюжета
       // Можно перенаправить на другую страницу для начала игры:
       // window.location.href = "story_" + storyId + ".html";
+    }
+
+    function goBack() {
+      window.location.href = "index.html"; // Перенаправляем на главную страницу
     }
   </script>
 </body>
