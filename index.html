@@ -1,14 +1,4 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Untitled</title>
-  
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
 <html>
 <head>
   <title>Текстовая игра (Полицейский фон)</title>
@@ -73,22 +63,22 @@
 
   <div class="button-container">
     <button onclick="openStoryChoices()">Сюжет</button>
-    <button onclick="showAlert('Настройки игры...')">Настройки</button>
-    <button onclick="showAlert('Информация об игре...')">О нас</button>
+    <button onclick="doNothing()">Настройки</button>
+    <button onclick="doNothing()">О нас</button>
   </div>
 
   <script>
     function showAlert(message) {
-      alert(message);
+      //alert(message); // УДАЛЕНО
     }
 
     function openStoryChoices() {
-      window.open("story_choices.html", "_blank");
+      window.open("story_choices.html", "_self"); // Открываем в той же вкладке
+    }
+
+    function doNothing() {
+      // Эта функция ничего не делает
     }
   </script>
-</body>
-</html>
-<!-- partial -->
-  
 </body>
 </html>
