@@ -339,515 +339,507 @@
             </div>
         </div>
 
-<div class="login-form">
-        <input type="password" id="adminCode" placeholder="Введите код доступа" />
-        <button class="btn" onclick="login()">Войти</button>
-    </div>
+        <div class="login-form">
+            <input type="password" id="adminCode" placeholder="Введите код доступа" />
+            <button class="btn" onclick="login()">Войти</button>
+        </div>
 
-    <div class="nav-tabs" id="navTabs">
-        <button class="tab-button active" onclick="showTab('complaint')">📝 Подать жалобу</button>
-        <button class="tab-button" onclick="showTab('status')">📊 Статус жалоб</button>
-        <button class="tab-button" id="moderationTab" onclick="showTab('moderation')" style="display: none;">⚖️ Модерация</button>
-        <button class="tab-button" id="adminTab" onclick="showTab('admin')" style="display: none;">👤 Управление</button>
-        <button class="tab-button" onclick="showTab('stats')">📈 Статистика</button>
-    </div>
+        <div class="nav-tabs" id="navTabs">
+            <button class="tab-button active" onclick="showTab('complaint')">📝 Подать жалобу</button>
+            <button class="tab-button" onclick="showTab('status')">📊 Статус жалоб</button>
+            <button class="tab-button" id="moderationTab" onclick="showTab('moderation')" style="display: none;">⚖️ Модерация</button>
+            <button class="tab-button" id="adminTab" onclick="showTab('admin')" style="display: none;">👤 Управление</button>
+            <button class="tab-button" onclick="showTab('stats')">📈 Статистика</button>
+        </div>
 
-    <!-- Подача жалобы -->
-    <div id="complaint" class="tab-content active">
-        <h2>📝 Подать жалобу на нарушителя</h2>
-        <form id="complaintForm">
-            <div class="form-group">
-                <label for="reporterName">Ваше имя/ник:</label>
-                <input type="text" id="reporterName" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="reporterEmail">Email для связи:</label>
-                <input type="email" id="reporterEmail" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="violatorName">Ник нарушителя:</label>
-                <input type="text" id="violatorName" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="violatorSteam">Steam ID / Профиль нарушителя:</label>
-                <input type="text" id="violatorSteam" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="violationType">Тип нарушения:</label>
-                <select id="violationType" required>
-                    <option value="">Выберите тип нарушения</option>
-                    <option value="cheating">🎯 Читерство / WH / Aim</option>
-                    <option value="toxic">😠 Токсичное поведение</option>
-                    <option value="griefing">🔥 Гриферство</option>
-                    <option value="smurfing">👤 Смурфинг</option>
-                    <option value="boosting">⬆️ Буст рейтинга</option>
-                    <option value="other">❓ Другое</option>
+        <!-- Подача жалобы -->
+        <div id="complaint" class="tab-content active">
+            <h2>📝 Подать жалобу на нарушителя</h2>
+            <form id="complaintForm">
+                <div class="form-group">
+                    <label for="reporterName">Ваше имя/ник:</label>
+                    <input type="text" id="reporterName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reporterEmail">Email для связи:</label>
+                    <input type="email" id="reporterEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="violatorName">Ник нарушителя:</label>
+                    <input type="text" id="violatorName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="violatorSteam">Steam ID / Профиль нарушителя:</label>
+                    <input type="text" id="violatorSteam" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="violationType">Тип нарушения:</label>
+                    <select id="violationType" required>
+                        <option value="">Выберите тип нарушения</option>
+                        <option value="cheating">🎯 Читерство / WH / Aim</option>
+                        <option value="toxic">😠 Токсичное поведение</option>
+                        <option value="griefing">🔥 Гриферство</option>
+                        <option value="smurfing">👤 Смурфинг</option>
+                        <option value="boosting">⬆️ Буст рейтинга</option>
+                        <option value="other">❓ Другое</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Подробное описание нарушения:</label>
+                    <textarea id="description" placeholder="Опишите детально что произошло, в какой момент игры, какие действия предпринимал нарушитель..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="evidence">Доказательства (ссылки на демо, скриншоты, видео):</label>
+                    <textarea id="evidence" placeholder="Вставьте ссылки на демо-записи, скриншоты, видео с YouTube/Twitch и другие доказательства"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="matchDetails">Детали матча:</label>
+                    <input type="text" id="matchDetails" placeholder="Дата, время, карта, счет матча (если помните)">
+                </div>
+                
+                <button type="submit" class="btn">🚀 Отправить жалобу</button>
+            </form>
+        </div>
+
+        <!-- Статус жалоб -->
+        <div id="status" class="tab-content">
+            <h2>📊 Статус ваших жалоб</h2>
+            <input type="text" class="search-box" id="statusSearch" placeholder="🔍 Поиск по ID жалобы или нику нарушителя...">
+            <div id="statusList"></div>
+        </div>
+
+        <!-- Модерация -->
+        <div id="moderation" class="tab-content">
+            <h2>⚖️ Панель модерации</h2>
+            <div style="margin-bottom: 20px;">
+                <select id="moderationFilter" onchange="filterComplaints()">
+                    <option value="all">Все жалобы</option>
+                    <option value="pending">Ожидают рассмотрения</option>
+                    <option value="reviewing">На рассмотрении</option>
                 </select>
             </div>
-            
-            <div class="form-group">
-                <label for="description">Подробное описание нарушения:</label>
-                <textarea id="description" placeholder="Опишите детально что произошло, в какой момент игры, какие действия предпринимал нарушитель..." required></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label for="evidence">Доказательства (ссылки на демо, скриншоты, видео):</label>
-                <textarea id="evidence" placeholder="Вставьте ссылки на демо-записи, скриншоты, видео с YouTube/Twitch и другие доказательства"></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label for="matchDetails">Детали матча:</label>
-                <input type="text" id="matchDetails" placeholder="Дата, время, карта, счет матча (если помните)">
-            </div>
-            
-            <button type="submit" class="btn">🚀 Отправить жалобу</button>
-        </form>
-    </div>
-
-    <!-- Статус жалоб -->
-    <div id="status" class="tab-content">
-        <h2>📊 Статус ваших жалоб</h2>
-        <input type="text" class="search-box" id="statusSearch" placeholder="🔍 Поиск по ID жалобы или нику нарушителя...">
-        <div id="statusList"></div>
-    </div>
-
-    <!-- Модерация -->
-    <div id="moderation" class="tab-content">
-        <h2>⚖️ Панель модерации</h2>
-        <div style="margin-bottom: 20px;">
-            <select id="moderationFilter" onchange="filterComplaints()">
-                <option value="all">Все жалобы</option>
-                <option value="pending">Ожидают рассмотрения</option>
-                <option value="reviewing">На рассмотрении</option>
-            </select>
+            <div id="moderationList"></div>
         </div>
-        <div id="moderationList"></div>
-    </div>
 
-    <!-- Управление пользователями -->
-    <div id="admin" class="tab-content">
-        <h2>👤 Управление пользователями</h2>
-        
-        <div style="margin-bottom: 30px;">
-            <h3>➕ Добавить модератора</h3>
-            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                <input type="text" id="newModeratorName" placeholder="Имя модератора" style="flex: 1;">
-                <input type="email" id="newModeratorEmail" placeholder="Email модератора" style="flex: 1;">
-                <button class="btn" onclick="addModerator()">Добавить</button>
+        <!-- Управление пользователями -->
+        <div id="admin" class="tab-content">
+            <h2>👤 Управление пользователями</h2>
+            
+            <div style="margin-bottom: 30px;">
+                <h3>➕ Добавить модератора</h3>
+                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                    <input type="text" id="newModeratorName" placeholder="Имя модератора" style="flex: 1;">
+                    <input type="email" id="newModeratorEmail" placeholder="Email модератора" style="flex: 1;">
+                    <button class="btn" onclick="addModerator()">Добавить</button>
+                </div>
+            </div>
+            
+            <h3>👥 Список пользователей</h3>
+            <input type="text" class="search-box" id="userSearch" placeholder="🔍 Поиск пользователей..." onkeyup="filterUsers()">
+            <div id="usersList"></div>
+        </div>
+
+        <!-- Статистика -->
+        <div id="stats" class="tab-content">
+            <h2>📈 Статистика системы</h2>
+            <div class="stats" id="statsContainer"></div>
+            
+            <div style="margin-top: 30px;">
+                <h3>📊 Детальная статистика</h3>
+                <div id="detailedStats"></div>
             </div>
         </div>
-        
-        <h3>👥 Список пользователей</h3>
-        <input type="text" class="search-box" id="userSearch" placeholder="🔍 Поиск пользователей..." onkeyup="filterUsers()">
-        <div id="usersList"></div>
     </div>
 
-    <!-- Статистика -->
-    <div id="stats" class="tab-content">
-        <h2>📈 Статистика системы</h2>
-        <div class="stats" id="statsContainer"></div>
-        
-        <div style="margin-top: 30px;">
-            <h3>📊 Детальная статистика</h3>
-            <div id="detailedStats"></div>
-        </div>
-    </div>
-</div>
+    <script>
+        // Глобальные переменные для хранения данных
+        let complaints = [];
+        let users = [];
+        let complaintIdCounter = 1;
+        let userIdCounter = 1;
+        let isAdminLoggedIn = false;
 
-<script>
-    // Глобальные переменные для хранения данных
-    let complaints = [];
-    let users = [
-        { id: 1, name: 'Admin', email: 'admin@g3lazi.com', role: 'admin' },
-        { id: 2, name: 'Moderator1', email: 'mod1@g3lazi.com', role: 'moderator' }
-    ];
-    let complaintIdCounter = 1;
-    let userIdCounter = 3;
-    let isAdminLoggedIn = false;
-
-    // Инициализация
-    document.addEventListener('DOMContentLoaded', function() {
-        loadSampleData();
-        updateStatusList();
-        updateModerationList();
-        updateUsersList();
-        updateStats();
-        toggleAdminTabs();
-    });
-
-    // Загрузка примерных данных
-    function loadSampleData() {
-        complaints = [
-            {
-                id: 'G3L-001',
-                reporterName: 'Player1',
-                reporterEmail: 'player1@example.com',
-                violatorName: 'SuspiciousPlayer',
-                violatorSteam: 'STEAM_0:1:123456789',
-                violationType: 'cheating',
-                description: 'Игрок использует WH и аим, очевидные подозрительные действия',
-                evidence: 'https://demo-link.com/suspicious-demo',
-                matchDetails: '15.06.2025, Mirage, 16-14',
-                status: 'pending',
-                date: new Date('2025-06-15'),
-                moderatorComments: ''
-            },
-            {
-                id: 'G3L-002',
-                reporterName: 'HonestGamer',
-                reporterEmail: 'honest@example.com',
-                violatorName: 'ToxicKid',
-                violatorSteam: 'STEAM_0:0:987654321',
-                violationType: 'toxic',
-                description: 'Постоянно оскорбляет команду, использует нецензурную лексику',
-                evidence: 'Скриншоты чата прилагаются',
-                matchDetails: '14.06.2025, Dust2, 12-16',
-                status: 'reviewing',
-                date: new Date('2025-06-14'),
-                moderatorComments: 'Рассматривается модератором'
-            }
-        ];
-        complaintIdCounter = 3;
-    }
-
-    // Переключение вкладок
-    function showTab(tabName) {
-        document.querySelectorAll('.tab-content').forEach(tab => {
-            tab.classList.remove('active');
-        });
-        document.querySelectorAll('.tab-button').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        
-        document.getElementById(tabName).classList.add('active');
-        event.target.classList.add('active');
-        
-        if (tabName === 'stats') {
-            updateStats();
-        }
-    }
-
-    // Подача жалобы
-    document.getElementById('complaintForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const complaint = {
-            id: `G3L-${String(complaintIdCounter).padStart(3, '0')}`,
-            reporterName: document.getElementById('reporterName').value,
-            reporterEmail: document.getElementById('reporterEmail').value,
-            violatorName: document.getElementById('violatorName').value,
-            violatorSteam: document.getElementById('violatorSteam').value,
-            violationType: document.getElementById('violationType').value,
-            description: document.getElementById('description').value,
-            evidence: document.getElementById('evidence').value,
-            matchDetails: document.getElementById('matchDetails').value,
-            status: 'pending',
-            date: new Date(),
-            moderatorComments: ''
-        };
-        
-        complaints.push(complaint);
-        complaintIdCounter++;
-        
-        alert(`✅ Жалоба успешно подана!\nID жалобы: ${complaint.id}\n\nВы можете отслеживать статус рассмотрения во вкладке "Статус жалоб"`);
-        
-        document.getElementById('complaintForm').reset();
-        updateStatusList();
-        updateModerationList();
-        updateStats();
-    });
-
-    // Обновление списка статусов
-    function updateStatusList() {
-        const statusList = document.getElementById('statusList');
-        const searchTerm = document.getElementById('statusSearch').value.toLowerCase();
-        
-        const filteredComplaints = complaints.filter(complaint => 
-            complaint.id.toLowerCase().includes(searchTerm) ||
-            complaint.violatorName.toLowerCase().includes(searchTerm) ||
-            complaint.reporterName.toLowerCase().includes(searchTerm)
-        );
-        
-        if (filteredComplaints.length === 0) {
-            statusList.innerHTML = '<div class="no-results">Жалобы не найдены</div>';
-            return;
-        }
-        
-        statusList.innerHTML = filteredComplaints.map(complaint => `
-            <div class="complaint-item">
-                <div class="complaint-header">
-                    <span class="complaint-id">${complaint.id}</span>
-                    <span class="status ${complaint.status}">${getStatusText(complaint.status)}</span>
-                </div>
-                <div class="complaint-details">
-                    <strong>Нарушитель:</strong> ${complaint.violatorName}<br>
-                    <strong>Тип:</strong> ${getViolationTypeText(complaint.violationType)}<br>
-                    <strong>Дата подачи:</strong> ${complaint.date.toLocaleDateString('ru-RU')}<br>
-                    ${complaint.moderatorComments ? `<strong>Комментарий модератора:</strong> ${complaint.moderatorComments}<br>` : ''}
-                </div>
-            </div>
-        `).join('');
-    }
-
-    // Обновление списка модерации
-    function updateModerationList() {
-        const moderationList = document.getElementById('moderationList');
-        const filter = document.getElementById('moderationFilter').value;
-        
-        const filteredComplaints = complaints.filter(complaint => 
-            filter === 'all' || complaint.status === filter
-        );
-        
-        if (filteredComplaints.length === 0) {
-            moderationList.innerHTML = '<div class="no-results">Нет жалоб для рассмотрения</div>';
-            return;
-        }
-        
-        moderationList.innerHTML = filteredComplaints.map(complaint => `
-            <div class="complaint-item">
-                <div class="complaint-header">
-                    <span class="complaint-id">${complaint.id}</span>
-                    <span class="status ${complaint.status}">${getStatusText(complaint.status)}</span>
-                </div>
-                <div class="complaint-details">
-                    <strong>Заявитель:</strong> ${complaint.reporterName} (${complaint.reporterEmail})<br>
-                    <strong>Нарушитель:</strong> ${complaint.violatorName}<br>
-                    <strong>Steam ID:</strong> ${complaint.violatorSteam}<br>
-                    <strong>Тип нарушения:</strong> ${getViolationTypeText(complaint.violationType)}<br>
-                    <strong>Описание:</strong> ${complaint.description}<br>
-                    ${complaint.evidence ? `<strong>Доказательства:</strong> ${complaint.evidence}<br>` : ''}
-                    ${complaint.matchDetails ? `<strong>Детали матча:</strong> ${complaint.matchDetails}<br>` : ''}
-                    <strong>Дата:</strong> ${complaint.date.toLocaleDateString('ru-RU')}
-                </div>
-                <div class="action-buttons">
-                    <button class="btn btn-small" onclick="takeComplaint('${complaint.id}')">📋 Взять в работу</button>
-                    <button class="btn btn-small btn-accept" onclick="resolveComplaint('${complaint.id}', 'resolved')">✅ Принять</button>
-                    <button class="btn btn-small btn-reject" onclick="resolveComplaint('${complaint.id}', 'rejected')">❌ Отклонить</button>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    // Фильтрация жалоб для модерации
-    function filterComplaints() {
-        updateModerationList();
-    }
-
-    // Взять жалобу в работу
-    function takeComplaint(complaintId) {
-        const complaint = complaints.find(c => c.id === complaintId);
-        if (complaint) {
-            complaint.status = 'reviewing';
-            complaint.moderatorComments = 'Жалоба взята в работу модератором';
-            updateModerationList();
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFromLocalStorage();
             updateStatusList();
-            updateStats();
-        }
-    }
-
-    // Разрешить жалобу
-    function resolveComplaint(complaintId, newStatus) {
-        const complaint = complaints.find(c => c.id === complaintId);
-        if (complaint) {
-            complaint.status = newStatus;
-            complaint.moderatorComments = newStatus === 'resolved' 
-                ? 'Жалоба рассмотрена. Нарушение подтверждено, приняты соответствующие меры.'
-                : 'Жалоба рассмотрена. Нарушение не подтверждено.';
             updateModerationList();
-            updateStatusList();
+            updateUsersList();
             updateStats();
-            
-            alert(`✅ Жалоба ${complaintId} ${newStatus === 'resolved' ? 'принята' : 'отклонена'}`);
-        }
-    }
+            toggleAdminTabs();
+        });
 
-    // Добавить модератора
-    function addModerator() {
-        if (!isAdminLoggedIn) {
-            alert('Доступ запрещен!');
-            return;
+        // Загрузка данных из localStorage
+        function loadFromLocalStorage() {
+            const savedComplaints = JSON.parse(localStorage.getItem('complaints'));
+            const savedUsers = JSON.parse(localStorage.getItem('users'));
+            const savedComplaintIdCounter = localStorage.getItem('complaintIdCounter');
+            const savedUserIdCounter = localStorage.getItem('userIdCounter');
+            const savedIsAdminLoggedIn = localStorage.getItem('isAdminLoggedIn');
+
+            complaints = savedComplaints ? savedComplaints : [];
+            users = savedUsers ? savedUsers : [{ id: 1, name: 'Admin', email: 'admin@g3lazi.com', role: 'admin' }];
+            complaintIdCounter = savedComplaintIdCounter ? parseInt(savedComplaintIdCounter) : 1;
+            userIdCounter = savedUserIdCounter ? parseInt(savedUserIdCounter) : 2;
+            isAdminLoggedIn = savedIsAdminLoggedIn === 'true';
         }
-        const name = document.getElementById('newModeratorName').value;
-        const email = document.getElementById('newModeratorEmail').value;
-        
-        if (name && email) {
-            users.push({
-                id: userIdCounter++,
-                name: name,
-                email: email,
-                role: 'moderator'
+
+        // Сохранение данных в localStorage
+        function saveToLocalStorage() {
+            localStorage.setItem('complaints', JSON.stringify(complaints));
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('complaintIdCounter', complaintIdCounter);
+            localStorage.setItem('userIdCounter', userIdCounter);
+            localStorage.setItem('isAdminLoggedIn', isAdminLoggedIn);
+        }
+
+        // Переключение вкладок
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
             });
             
-            document.getElementById('newModeratorName').value = '';
-            document.getElementById('newModeratorEmail').value = '';
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
             
-            updateUsersList();
-            alert('✅ Модератор успешно добавлен!');
-        } else {
-            alert('❌ Заполните все поля!');
+            if (tabName === 'stats') {
+                updateStats();
+            }
         }
-    }
 
-    // Обновление списка пользователей
-    function updateUsersList() {
-        const usersList = document.getElementById('usersList');
-        const searchTerm = document.getElementById('userSearch') ? 
-            document.getElementById('userSearch').value.toLowerCase() : '';
-        
-        const filteredUsers = users.filter(user => 
-            user.name.toLowerCase().includes(searchTerm) ||
-            user.email.toLowerCase().includes(searchTerm)
-        );
-        
-        usersList.innerHTML = filteredUsers.map(user => `
-            <div class="user-item">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <strong>${user.name}</strong> <span class="role-badge role-${user.role}">${getRoleText(user.role)}</span><br>
-                        <small>${user.email}</small>
+        // Подача жалобы
+        document.getElementById('complaintForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const complaint = {
+                id: `G3L-${String(complaintIdCounter).padStart(3, '0')}`,
+                reporterName: document.getElementById('reporterName').value,
+                reporterEmail: document.getElementById('reporterEmail').value,
+                violatorName: document.getElementById('violatorName').value,
+                violatorSteam: document.getElementById('violatorSteam').value,
+                violationType: document.getElementById('violationType').value,
+                description: document.getElementById('description').value,
+                evidence: document.getElementById('evidence').value,
+                matchDetails: document.getElementById('matchDetails').value,
+                status: 'pending',
+                date: new Date(),
+                moderatorComments: ''
+            };
+            
+            complaints.push(complaint);
+            complaintIdCounter++;
+            
+            alert(`✅ Жалоба успешно подана!\nID жалобы: ${complaint.id}\n\nВы можете отслеживать статус рассмотрения во вкладке "Статус жалоб"`);
+            
+            document.getElementById('complaintForm').reset();
+            updateStatusList();
+            updateModerationList();
+            updateStats();
+            saveToLocalStorage();
+        });
+
+        // Обновление списка статусов
+        function updateStatusList() {
+            const statusList = document.getElementById('statusList');
+            const searchTerm = document.getElementById('statusSearch').value.toLowerCase();
+            
+            const filteredComplaints = complaints.filter(complaint => 
+                complaint.id.toLowerCase().includes(searchTerm) ||
+                complaint.violatorName.toLowerCase().includes(searchTerm) ||
+                complaint.reporterName.toLowerCase().includes(searchTerm)
+            );
+            
+            if (filteredComplaints.length === 0) {
+                statusList.innerHTML = '<div class="no-results">Жалобы не найдены</div>';
+                return;
+            }
+            
+            statusList.innerHTML = filteredComplaints.map(complaint => `
+                <div class="complaint-item">
+                    <div class="complaint-header">
+                        <span class="complaint-id">${complaint.id}</span>
+                        <span class="status ${complaint.status}">${getStatusText(complaint.status)}</span>
                     </div>
-                    <div class="action-buttons">
-                        ${user.role !== 'admin' ? `<button class="btn btn-small btn-reject" onclick="removeUser(${user.id})">🗑️ Удалить</button>` : ''}
+                    <div class="complaint-details">
+                        <strong>Нарушитель:</strong> ${complaint.violatorName}<br>
+                        <strong>Тип:</strong> ${getViolationTypeText(complaint.violationType)}<br>
+                        <strong>Дата подачи:</strong> ${complaint.date.toLocaleDateString('ru-RU')}<br>
+                        ${complaint.moderatorComments ? `<strong>Комментарий модератора:</strong> ${complaint.moderatorComments}<br>` : ''}
                     </div>
                 </div>
-            </div>
-        `).join('');
-    }
-
-    // Фильтрация пользователей
-    function filterUsers() {
-        updateUsersList();
-    }
-
-    // Удаление пользователя
-    function removeUser(userId) {
-        if (!isAdminLoggedIn) {
-            alert('Доступ запрещен!');
-            return;
+            `).join('');
         }
-        if (confirm('Вы уверены, что хотите удалить этого пользователя?')) {
-            users = users.filter(user => user.id !== userId);
-            updateUsersList();
-            alert('✅ Пользователь удален!');
-        }
-    }
 
-    // Обновление статистики
-    function updateStats() {
-        const statsContainer = document.getElementById('statsContainer');
-        const detailedStats = document.getElementById('detailedStats');
-        
-        const totalComplaints = complaints.length;
-        const pendingComplaints = complaints.filter(c => c.status === 'pending').length;
-        const reviewingComplaints = complaints.filter(c => c.status === 'reviewing').length;
-        const resolvedComplaints = complaints.filter(c => c.status === 'resolved').length;
-        const rejectedComplaints = complaints.filter(c => c.status === 'rejected').length;
-        
-        const violationTypes = {};
-        complaints.forEach(c => {
-            violationTypes[c.violationType] = (violationTypes[c.violationType] || 0) + 1;
-        });
-        
-        statsContainer.innerHTML = `
-            <div class="stat-card">
-                <div class="stat-number">${totalComplaints}</div>
-                <div class="stat-label">Всего жалоб</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">${pendingComplaints}</div>
-                <div class="stat-label">Ожидают рассмотрения</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">${reviewingComplaints}</div>
-                <div class="stat-label">На рассмотрении</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">${resolvedComplaints}</div>
-                <div class="stat-label">Решены</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">${rejectedComplaints}</div>
-                <div class="stat-label">Отклонены</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">${users.filter(u => u.role === 'moderator').length}</div>
-                <div class="stat-label">Модераторов</div>
-            </div>
-        `;
-        
-        const violationStatsHtml = Object.entries(violationTypes).map(([type, count]) => 
-            `<p><strong>${getViolationTypeText(type)}:</strong> ${count} жалоб</p>`
-        ).join('');
-        
-        detailedStats.innerHTML = `
-            <div style="background: #f8f9fa; padding: 20px; border-radius: 15px;">
-                <h4>📊 Статистика по типам нарушений:</h4>
-                ${violationStatsHtml || '<p>Нет данных</p>'}
+        // Обновление списка модерации
+        function updateModerationList() {
+            const moderationList = document.getElementById('moderationList');
+            const filter = document.getElementById('moderationFilter').value;
+            
+            const filteredComplaints = complaints.filter(complaint => 
+                filter === 'all' || complaint.status === filter
+            );
+            
+            if (filteredComplaints.length === 0) {
+                moderationList.innerHTML = '<div class="no-results">Нет жалоб для рассмотрения</div>';
+                return;
+            }
+            
+            moderationList.innerHTML = filteredComplaints.map(complaint => `
+                <div class="complaint-item">
+                    <div class="complaint-header">
+                        <span class="complaint-id">${complaint.id}</span>
+                        <span class="status ${complaint.status}">${getStatusText(complaint.status)}</span>
+                    </div>
+                    <div class="complaint-details">
+                        <strong>Заявитель:</strong> ${complaint.reporterName} (${complaint.reporterEmail})<br>
+                        <strong>Нарушитель:</strong> ${complaint.violatorName}<br>
+                        <strong>Steam ID:</strong> ${complaint.violatorSteam}<br>
+                        <strong>Тип нарушения:</strong> ${getViolationTypeText(complaint.violationType)}<br>
+                        <strong>Описание:</strong> ${complaint.description}<br>
+                        ${complaint.evidence ? `<strong>Доказательства:</strong> ${complaint.evidence}<br>` : ''}
+                        ${complaint.matchDetails ? `<strong>Детали матча:</strong> ${complaint.matchDetails}<br>` : ''}
+                        <strong>Дата:</strong> ${complaint.date.toLocaleDateString('ru-RU')}
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-small" onclick="takeComplaint('${complaint.id}')">📋 Взять в работу</button>
+                        <button class="btn btn-small btn-accept" onclick="resolveComplaint('${complaint.id}', 'resolved')">✅ Принять</button>
+                        <button class="btn btn-small btn-reject" onclick="resolveComplaint('${complaint.id}', 'rejected')">❌ Отклонить</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Фильтрация жалоб для модерации
+        function filterComplaints() {
+            updateModerationList();
+        }
+
+        // Взять жалобу в работу
+        function takeComplaint(complaintId) {
+            const complaint = complaints.find(c => c.id === complaintId);
+            if (complaint) {
+                complaint.status = 'reviewing';
+                complaint.moderatorComments = 'Жалоба взята в работу модератором';
+                updateModerationList();
+                updateStatusList();
+                updateStats();
+                saveToLocalStorage();
+            }
+        }
+
+        // Разрешить жалобу
+        function resolveComplaint(complaintId, newStatus) {
+            const complaint = complaints.find(c => c.id === complaintId);
+            if (complaint) {
+                complaint.status = newStatus;
+                complaint.moderatorComments = newStatus === 'resolved' 
+                    ? 'Жалоба рассмотрена. Нарушение подтверждено, приняты соответствующие меры.'
+                    : 'Жалоба рассмотрена. Нарушение не подтверждено.';
+                updateModerationList();
+                updateStatusList();
+                updateStats();
+                saveToLocalStorage();
                 
-                <h4 style="margin-top: 20px;">⚡ Эффективность работы:</h4>
-                <p><strong>Процент решенных жалоб:</strong> ${totalComplaints > 0 ? Math.round((resolvedComplaints + rejectedComplaints) / totalComplaints * 100) : 0}%</p>
-                <p><strong>Среднее время рассмотрения:</strong> 2-3 часа</p>
-            </div>
-        `;
-    }
-
-    // Поиск по статусам
-    document.getElementById('statusSearch').addEventListener('keyup', updateStatusList);
-
-    // Вход администратора
-    function login() {
-        const adminCode = document.getElementById('adminCode').value;
-        if (adminCode === 'k1ClcJ_-3c') {
-            isAdminLoggedIn = true;
-            alert('✅ Вы успешно вошли как администратор!');
-            toggleAdminTabs();
-        } else {
-            alert('❌ Неверный код доступа!');
+                alert(`✅ Жалоба ${complaintId} ${newStatus === 'resolved' ? 'принята' : 'отклонена'}`);
+            }
         }
-    }
 
-    // Переключение вкладок администратора
-    function toggleAdminTabs() {
-        document.getElementById('moderationTab').style.display = isAdminLoggedIn ? 'block' : 'none';
-        document.getElementById('adminTab').style.display = isAdminLoggedIn ? 'block' : 'none';
-    }
+        // Добавить модератора
+        function addModerator() {
+            if (!isAdminLoggedIn) {
+                alert('Доступ запрещен!');
+                return;
+            }
+            const name = document.getElementById('newModeratorName').value;
+            const email = document.getElementById('newModeratorEmail').value;
+            
+            if (name && email) {
+                users.push({
+                    id: userIdCounter++,
+                    name: name,
+                    email: email,
+                    role: 'moderator'
+                });
+                
+                document.getElementById('newModeratorName').value = '';
+                document.getElementById('newModeratorEmail').value = '';
+                
+                updateUsersList();
+                alert('✅ Модератор успешно добавлен!');
+                saveToLocalStorage();
+            } else {
+                alert('❌ Заполните все поля!');
+            }
+        }
 
-    // Вспомогательные функции
-    function getStatusText(status) {
-        const statusTexts = {
-            'pending': '⏳ Ожидает',
-            'reviewing': '🔍 Рассматривается',
-            'resolved': '✅ Решена',
-            'rejected': '❌ Отклонена'
-        };
-        return statusTexts[status] || status;
-    }
+        // Обновление списка пользователей
+        function updateUsersList() {
+            const usersList = document.getElementById('usersList');
+            const searchTerm = document.getElementById('userSearch') ? 
+                document.getElementById('userSearch').value.toLowerCase() : '';
+            
+            const filteredUsers = users.filter(user => 
+                user.name.toLowerCase().includes(searchTerm) ||
+                user.email.toLowerCase().includes(searchTerm)
+            );
+            
+            usersList.innerHTML = filteredUsers.map(user => `
+                <div class="user-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>${user.name}</strong> <span class="role-badge role-${user.role}">${getRoleText(user.role)}</span><br>
+                            <small>${user.email}</small>
+                        </div>
+                        <div class="action-buttons">
+                            ${user.role !== 'admin' ? `<button class="btn btn-small btn-reject" onclick="removeUser(${user.id})">🗑️ Удалить</button>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
 
-    function getViolationTypeText(type) {
-        const typeTexts = {
-            'cheating': '🎯 Читерство',
-            'toxic': '😠 Токсичность',
-            'griefing': '🔥 Гриферство',
-            'smurfing': '👤 Смурфинг',
-            'boosting': '⬆️ Буст рейтинга',
-            'other': '❓ Другое'
-        };
-        return typeTexts[type] || type;
-    }
+        // Фильтрация пользователей
+        function filterUsers() {
+            updateUsersList();
+        }
 
-    function getRoleText(role) {
-        const roleTexts = {
-            'admin': 'Администратор',
-            'moderator': 'Модератор',
-            'user': 'Пользователь'
-        };
-        return roleTexts[role] || role;
-    }
-</script>
+        // Удаление пользователя
+        function removeUser(userId) {
+            if (!isAdminLoggedIn) {
+                alert('Доступ запрещен!');
+                return;
+            }
+            if (confirm('Вы уверены, что хотите удалить этого пользователя?')) {
+                users = users.filter(user => user.id !== userId);
+                updateUsersList();
+                alert('✅ Пользователь удален!');
+                saveToLocalStorage();
+            }
+        }
+
+        // Обновление статистики
+        function updateStats() {
+            const statsContainer = document.getElementById('statsContainer');
+            const detailedStats = document.getElementById('detailedStats');
+            
+            const totalComplaints = complaints.length;
+            const pendingComplaints = complaints.filter(c => c.status === 'pending').length;
+            const reviewingComplaints = complaints.filter(c => c.status === 'reviewing').length;
+            const resolvedComplaints = complaints.filter(c => c.status === 'resolved').length;
+            const rejectedComplaints = complaints.filter(c => c.status === 'rejected').length;
+            
+            const violationTypes = {};
+            complaints.forEach(c => {
+                violationTypes[c.violationType] = (violationTypes[c.violationType] || 0) + 1;
+            });
+            
+            statsContainer.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${totalComplaints}</div>
+                    <div class="stat-label">Всего жалоб</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${pendingComplaints}</div>
+                    <div class="stat-label">Ожидают рассмотрения</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${reviewingComplaints}</div>
+                    <div class="stat-label">На рассмотрении</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${resolvedComplaints}</div>
+                    <div class="stat-label">Решены</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${rejectedComplaints}</div>
+                    <div class="stat-label">Отклонены</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${users.filter(u => u.role === 'moderator').length}</div>
+                    <div class="stat-label">Модераторов</div>
+                </div>
+            `;
+            
+            const violationStatsHtml = Object.entries(violationTypes).map(([type, count]) => 
+                `<p><strong>${getViolationTypeText(type)}:</strong> ${count} жалоб</p>`
+            ).join('');
+            
+            detailedStats.innerHTML = `
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 15px;">
+                    <h4>📊 Статистика по типам нарушений:</h4>
+                    ${violationStatsHtml || '<p>Нет данных</p>'}
+                    
+                    <h4 style="margin-top: 20px;">⚡ Эффективность работы:</h4>
+                    <p><strong>Процент решенных жалоб:</strong> ${totalComplaints > 0 ? Math.round((resolvedComplaints + rejectedComplaints) / totalComplaints * 100) : 0}%</p>
+                    <p><strong>Среднее время рассмотрения:</strong> 2-3 часа</p>
+                </div>
+            `;
+        }
+
+        // Поиск по статусам
+        document.getElementById('statusSearch').addEventListener('keyup', updateStatusList);
+
+        // Вход администратора
+        function login() {
+            const adminCode = document.getElementById('adminCode').value;
+            if (adminCode === 'k1ClcJ_-3c') {
+                isAdminLoggedIn = true;
+                alert('✅ Вы успешно вошли как администратор!');
+                toggleAdminTabs();
+                saveToLocalStorage();
+            } else {
+                alert('❌ Неверный код доступа!');
+            }
+        }
+
+        // Переключение вкладок администратора
+        function toggleAdminTabs() {
+            document.getElementById('moderationTab').style.display = isAdminLoggedIn ? 'block' : 'none';
+            document.getElementById('adminTab').style.display = isAdminLoggedIn ? 'block' : 'none';
+        }
+
+        // Вспомогательные функции
+        function getStatusText(status) {
+            const statusTexts = {
+                'pending': '⏳ Ожидает',
+                'reviewing': '🔍 Рассматривается',
+                'resolved': '✅ Решена',
+                'rejected': '❌ Отклонена'
+            };
+            return statusTexts[status] || status;
+        }
+
+        function getViolationTypeText(type) {
+            const typeTexts = {
+                'cheating': '🎯 Читерство',
+                'toxic': '😠 Токсичность',
+                'griefing': '🔥 Гриферство',
+                'smurfing': '👤 Смурфинг',
+                'boosting': '⬆️ Буст рейтинга',
+                'other': '❓ Другое'
+            };
+            return typeTexts[type] || type;
+        }
+
+        function getRoleText(role) {
+            const roleTexts = {
+                'admin': 'Администратор',
+                'moderator': 'Модератор',
+                'user': 'Пользователь'
+            };
+            return roleTexts[role] || role;
+        }
+    </script>
 </body>
 </html>
 <!-- partial -->
