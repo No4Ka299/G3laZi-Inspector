@@ -1,19 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Untitled</title>
-  <link rel="stylesheet" href="./style.css">
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>G3laZi Инспектор - Борьба за честную игру</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         * {
             margin: 0;
@@ -305,6 +296,42 @@
             font-size: 1.1em;
         }
 
+        .login-form {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-form input {
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            width: 300px;
+        }
+
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
+        }
+
         @media (max-width: 768px) {
             .nav-tabs {
                 flex-direction: column;
@@ -326,6 +353,16 @@
             .stats {
                 grid-template-columns: 1fr;
             }
+
+            .login-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .login-form input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
@@ -339,179 +376,245 @@
             </div>
         </div>
 
-<div class="login-form">
-        <input type="password" id="adminCode" placeholder="Введите код доступа" />
-        <button class="btn" onclick="login()">Войти</button>
-    </div>
+        <div id="loginForm" class="login-form">
+            <input type="password" id="adminCode" placeholder="Введите код доступа" />
+            <button class="btn" onclick="login()">Войти</button>
+        </div>
 
-    <div class="nav-tabs" id="navTabs">
-        <button class="tab-button active" onclick="showTab('complaint')">📝 Подать жалобу</button>
-        <button class="tab-button" onclick="showTab('status')">📊 Статус жалоб</button>
-        <button class="tab-button" id="moderationTab" onclick="showTab('moderation')" style="display: none;">⚖️ Модерация</button>
-        <button class="tab-button" id="adminTab" onclick="showTab('admin')" style="display: none;">👤 Управление</button>
-        <button class="tab-button" onclick="showTab('stats')">📈 Статистика</button>
-    </div>
+        <div id="loggedInPanel" class="login-form" style="display: none;">
+            <span>Вы вошли как администратор</span>
+            <button class="logout-btn" onclick="logout()">Выйти</button>
+        </div>
 
-    <!-- Подача жалобы -->
-    <div id="complaint" class="tab-content active">
-        <h2>📝 Подать жалобу на нарушителя</h2>
-        <form id="complaintForm">
-            <div class="form-group">
-                <label for="reporterName">Ваше имя/ник:</label>
-                <input type="text" id="reporterName" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="reporterEmail">Email для связи:</label>
-                <input type="email" id="reporterEmail" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="violatorName">Ник нарушителя:</label>
-                <input type="text" id="violatorName" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="violatorSteam">Steam ID / Профиль нарушителя:</label>
-                <input type="text" id="violatorSteam" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="violationType">Тип нарушения:</label>
-                <select id="violationType" required>
-                    <option value="">Выберите тип нарушения</option>
-                    <option value="cheating">🎯 Читерство / WH / Aim</option>
-                    <option value="toxic">😠 Токсичное поведение</option>
-                    <option value="griefing">🔥 Гриферство</option>
-                    <option value="smurfing">👤 Смурфинг</option>
-                    <option value="boosting">⬆️ Буст рейтинга</option>
-                    <option value="other">❓ Другое</option>
+        <div class="nav-tabs" id="navTabs">
+            <button class="tab-button active" onclick="showTab('complaint')">📝 Подать жалобу</button>
+            <button class="tab-button" onclick="showTab('status')">📊 Статус жалоб</button>
+            <button class="tab-button" id="moderationTab" onclick="showTab('moderation')" style="display: none;">⚖️ Модерация</button>
+            <button class="tab-button" id="adminTab" onclick="showTab('admin')" style="display: none;">👤 Управление</button>
+            <button class="tab-button" onclick="showTab('stats')">📈 Статистика</button>
+        </div>
+
+        <!-- Подача жалобы -->
+        <div id="complaint" class="tab-content active">
+            <h2>📝 Подать жалобу на нарушителя</h2>
+            <form id="complaintForm">
+                <div class="form-group">
+                    <label for="reporterName">Ваше имя/ник:</label>
+                    <input type="text" id="reporterName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reporterEmail">Email для связи:</label>
+                    <input type="email" id="reporterEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="violatorName">Ник нарушителя:</label>
+                    <input type="text" id="violatorName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="violatorSteam">Steam ID / Профиль нарушителя:</label>
+                    <input type="text" id="violatorSteam" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="violationType">Тип нарушения:</label>
+                    <select id="violationType" required>
+                        <option value="">Выберите тип нарушения</option>
+                        <option value="cheating">🎯 Читерство / WH / Aim</option>
+                        <option value="toxic">😠 Токсичное поведение</option>
+                        <option value="griefing">🔥 Гриферство</option>
+                        <option value="smurfing">👤 Смурфинг</option>
+                        <option value="boosting">⬆️ Буст рейтинга</option>
+                        <option value="other">❓ Другое</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Подробное описание нарушения:</label>
+                    <textarea id="description" placeholder="Опишите детально что произошло, в какой момент игры, какие действия предпринимал нарушитель..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="evidence">Доказательства (ссылки на демо, скриншоты, видео):</label>
+                    <textarea id="evidence" placeholder="Вставьте ссылки на демо-записи, скриншоты, видео с YouTube/Twitch и другие доказательства"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="matchDetails">Детали матча:</label>
+                    <input type="text" id="matchDetails" placeholder="Дата, время, карта, счет матча (если помните)">
+                </div>
+                
+                <button type="submit" class="btn">🚀 Отправить жалобу</button>
+            </form>
+        </div>
+
+        <!-- Статус жалоб -->
+        <div id="status" class="tab-content">
+            <h2>📊 Статус ваших жалоб</h2>
+            <input type="text" class="search-box" id="statusSearch" placeholder="🔍 Поиск по ID жалобы или нику нарушителя...">
+            <div id="statusList"></div>
+        </div>
+
+        <!-- Модерация -->
+        <div id="moderation" class="tab-content">
+            <h2>⚖️ Панель модерации</h2>
+            <div style="margin-bottom: 20px;">
+                <select id="moderationFilter" onchange="filterComplaints()">
+                    <option value="all">Все жалобы</option>
+                    <option value="pending">Ожидают рассмотрения</option>
+                    <option value="reviewing">На рассмотрении</option>
                 </select>
             </div>
-            
-            <div class="form-group">
-                <label for="description">Подробное описание нарушения:</label>
-                <textarea id="description" placeholder="Опишите детально что произошло, в какой момент игры, какие действия предпринимал нарушитель..." required></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label for="evidence">Доказательства (ссылки на демо, скриншоты, видео):</label>
-                <textarea id="evidence" placeholder="Вставьте ссылки на демо-записи, скриншоты, видео с YouTube/Twitch и другие доказательства"></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label for="matchDetails">Детали матча:</label>
-                <input type="text" id="matchDetails" placeholder="Дата, время, карта, счет матча (если помните)">
-            </div>
-            
-            <button type="submit" class="btn">🚀 Отправить жалобу</button>
-        </form>
-    </div>
-
-    <!-- Статус жалоб -->
-    <div id="status" class="tab-content">
-        <h2>📊 Статус ваших жалоб</h2>
-        <input type="text" class="search-box" id="statusSearch" placeholder="🔍 Поиск по ID жалобы или нику нарушителя...">
-        <div id="statusList"></div>
-    </div>
-
-    <!-- Модерация -->
-    <div id="moderation" class="tab-content">
-        <h2>⚖️ Панель модерации</h2>
-        <div style="margin-bottom: 20px;">
-            <select id="moderationFilter" onchange="filterComplaints()">
-                <option value="all">Все жалобы</option>
-                <option value="pending">Ожидают рассмотрения</option>
-                <option value="reviewing">На рассмотрении</option>
-            </select>
+            <div id="moderationList"></div>
         </div>
-        <div id="moderationList"></div>
-    </div>
 
-    <!-- Управление пользователями -->
-    <div id="admin" class="tab-content">
-        <h2>👤 Управление пользователями</h2>
-        
-        <div style="margin-bottom: 30px;">
-            <h3>➕ Добавить модератора</h3>
-            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                <input type="text" id="newModeratorName" placeholder="Имя модератора" style="flex: 1;">
-                <input type="email" id="newModeratorEmail" placeholder="Email модератора" style="flex: 1;">
-                <button class="btn" onclick="addModerator()">Добавить</button>
+        <!-- Управление пользователями -->
+        <div id="admin" class="tab-content">
+            <h2>👤 Управление пользователями</h2>
+            
+            <div style="margin-bottom: 30px;">
+                <h3>➕ Добавить модератора</h3>
+                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                    <input type="text" id="newModeratorName" placeholder="Имя модератора" style="flex: 1;">
+                    <input type="email" id="newModeratorEmail" placeholder="Email модератора" style="flex: 1;">
+                    <button class="btn" onclick="addModerator()">Добавить</button>
+                </div>
+            </div>
+            
+            <h3>👥 Список пользователей</h3>
+            <input type="text" class="search-box" id="userSearch" placeholder="🔍 Поиск пользователей..." onkeyup="filterUsers()">
+            <div id="usersList"></div>
+        </div>
+
+        <!-- Статистика -->
+        <div id="stats" class="tab-content">
+            <h2>📈 Статистика системы</h2>
+            <div class="stats" id="statsContainer"></div>
+            
+            <div style="margin-top: 30px;">
+                <h3>📊 Детальная статистика</h4>
+                <div id="detailedStats"></div>
             </div>
         </div>
-        
-        <h3>👥 Список пользователей</h3>
-        <input type="text" class="search-box" id="userSearch" placeholder="🔍 Поиск пользователей..." onkeyup="filterUsers()">
-        <div id="usersList"></div>
     </div>
-
-    <!-- Статистика -->
-    <div id="stats" class="tab-content">
-        <h2>📈 Статистика системы</h2>
-        <div class="stats" id="statsContainer"></div>
-        
-        <div style="margin-top: 30px;">
-            <h3>📊 Детальная статистика</h3>
-            <div id="detailedStats"></div>
-        </div>
-    </div>
-</div>
 
 <script>
     // Глобальные переменные для хранения данных
     let complaints = [];
-    let users = [
-        { id: 1, name: 'Admin', email: 'admin@g3lazi.com', role: 'admin' },
-        { id: 2, name: 'Moderator1', email: 'mod1@g3lazi.com', role: 'moderator' }
-    ];
+    let users = [];
     let complaintIdCounter = 1;
-    let userIdCounter = 3;
+    let userIdCounter = 1;
     let isAdminLoggedIn = false;
 
-    // Инициализация
+    // Инициализация при загрузке страницы
     document.addEventListener('DOMContentLoaded', function() {
-        loadSampleData();
+        loadDataFromStorage();
+        checkAdminSession();
         updateStatusList();
         updateModerationList();
         updateUsersList();
         updateStats();
         toggleAdminTabs();
+        toggleLoginForms();
     });
 
-    // Загрузка примерных данных
-    function loadSampleData() {
-        complaints = [
-            {
-                id: 'G3L-001',
-                reporterName: 'Player1',
-                reporterEmail: 'player1@example.com',
-                violatorName: 'SuspiciousPlayer',
-                violatorSteam: 'STEAM_0:1:123456789',
-                violationType: 'cheating',
-                description: 'Игрок использует WH и аим, очевидные подозрительные действия',
-                evidence: 'https://demo-link.com/suspicious-demo',
-                matchDetails: '15.06.2025, Mirage, 16-14',
-                status: 'pending',
-                date: new Date('2025-06-15'),
-                moderatorComments: ''
-            },
-            {
-                id: 'G3L-002',
-                reporterName: 'HonestGamer',
-                reporterEmail: 'honest@example.com',
-                violatorName: 'ToxicKid',
-                violatorSteam: 'STEAM_0:0:987654321',
-                violationType: 'toxic',
-                description: 'Постоянно оскорбляет команду, использует нецензурную лексику',
-                evidence: 'Скриншоты чата прилагаются',
-                matchDetails: '14.06.2025, Dust2, 12-16',
-                status: 'reviewing',
-                date: new Date('2025-06-14'),
-                moderatorComments: 'Рассматривается модератором'
-            }
-        ];
-        complaintIdCounter = 3;
+    // Загрузка данных из localStorage
+    function loadDataFromStorage() {
+        const storedComplaints = localStorage.getItem('g3laziComplaints');
+        const storedUsers = localStorage.getItem('g3laziUsers');
+        const storedCounters = localStorage.getItem('g3laziCounters');
+        const storedAdminState = localStorage.getItem('g3laziAdminState');
+
+        if (storedComplaints) {
+            complaints = JSON.parse(storedComplaints);
+        } else {
+            // Загрузка примерных данных, если нет сохраненных
+            complaints = [
+                {
+                    id: 'G3L-001',
+                    reporterName: 'Player1',
+                    reporterEmail: 'player1@example.com',
+                    violatorName: 'SuspiciousPlayer',
+                    violatorSteam: 'STEAM_0:1:123456789',
+                    violationType: 'cheating',
+                    description: 'Игрок использует WH и аим, очевидные подозрительные действия',
+                    evidence: 'https://demo-link.com/suspicious-demo',
+                    matchDetails: '15.06.2025, Mirage, 16-14',
+                    status: 'pending',
+                    date: new Date('2025-06-15'),
+                    moderatorComments: ''
+                },
+                {
+                    id: 'G3L-002',
+                    reporterName: 'HonestGamer',
+                    reporterEmail: 'honest@example.com',
+                    violatorName: 'ToxicKid',
+                    violatorSteam: 'STEAM_0:0:987654321',
+                    violationType: 'toxic',
+                    description: 'Постоянно оскорбляет команду, использует нецензурную лексику',
+                    evidence: 'Скриншоты чата прилагаются',
+                    matchDetails: '14.06.2025, Dust2, 12-16',
+                    status: 'reviewing',
+                    date: new Date('2025-06-14'),
+                    moderatorComments: 'Рассматривается модератором'
+                }
+            ];
+            saveComplaintsToStorage();
+        }
+
+        if (storedUsers) {
+            users = JSON.parse(storedUsers);
+        } else {
+            // Загрузка примерных данных, если нет сохраненных
+            users = [
+                { id: 1, name: 'Admin', email: 'admin@g3lazi.com', role: 'admin' },
+                { id: 2, name: 'Moderator1', email: 'mod1@g3lazi.com', role: 'moderator' }
+            ];
+            saveUsersToStorage();
+        }
+
+        if (storedCounters) {
+            const counters = JSON.parse(storedCounters);
+            complaintIdCounter = counters.complaintIdCounter || 3;
+            userIdCounter = counters.userIdCounter || 3;
+        }
+
+        if (storedAdminState) {
+            isAdminLoggedIn = JSON.parse(storedAdminState);
+        }
+    }
+
+    // Проверка сессии администратора
+    function checkAdminSession() {
+        const sessionExpiry = localStorage.getItem('g3laziSessionExpiry');
+        if (sessionExpiry && new Date().getTime() < parseInt(sessionExpiry)) {
+            isAdminLoggedIn = true;
+        } else {
+            isAdminLoggedIn = false;
+            localStorage.removeItem('g3laziSessionExpiry');
+        }
+    }
+
+    // Сохранение данных в localStorage
+    function saveComplaintsToStorage() {
+        localStorage.setItem('g3laziComplaints', JSON.stringify(complaints));
+    }
+
+    function saveUsersToStorage() {
+        localStorage.setItem('g3laziUsers', JSON.stringify(users));
+    }
+
+    function saveCountersToStorage() {
+        localStorage.setItem('g3laziCounters', JSON.stringify({
+            complaintIdCounter: complaintIdCounter,
+            userIdCounter: userIdCounter
+        }));
+    }
+
+    function saveAdminStateToStorage() {
+        localStorage.setItem('g3laziAdminState', JSON.stringify(isAdminLoggedIn));
     }
 
     // Переключение вкладок
@@ -559,6 +662,10 @@
         updateStatusList();
         updateModerationList();
         updateStats();
+        
+        // Сохраняем данные
+        saveComplaintsToStorage();
+        saveCountersToStorage();
     });
 
     // Обновление списка статусов
@@ -586,7 +693,7 @@
                 <div class="complaint-details">
                     <strong>Нарушитель:</strong> ${complaint.violatorName}<br>
                     <strong>Тип:</strong> ${getViolationTypeText(complaint.violationType)}<br>
-                    <strong>Дата подачи:</strong> ${complaint.date.toLocaleDateString('ru-RU')}<br>
+                    <strong>Дата подачи:</strong> ${new Date(complaint.date).toLocaleDateString('ru-RU')}<br>
                     ${complaint.moderatorComments ? `<strong>Комментарий модератора:</strong> ${complaint.moderatorComments}<br>` : ''}
                 </div>
             </div>
@@ -621,7 +728,7 @@
                     <strong>Описание:</strong> ${complaint.description}<br>
                     ${complaint.evidence ? `<strong>Доказательства:</strong> ${complaint.evidence}<br>` : ''}
                     ${complaint.matchDetails ? `<strong>Детали матча:</strong> ${complaint.matchDetails}<br>` : ''}
-                    <strong>Дата:</strong> ${complaint.date.toLocaleDateString('ru-RU')}
+                    <strong>Дата:</strong> ${new Date(complaint.date).toLocaleDateString('ru-RU')}
                 </div>
                 <div class="action-buttons">
                     <button class="btn btn-small" onclick="takeComplaint('${complaint.id}')">📋 Взять в работу</button>
@@ -646,6 +753,9 @@
             updateModerationList();
             updateStatusList();
             updateStats();
+            
+            // Сохраняем изменения
+            saveComplaintsToStorage();
         }
     }
 
@@ -662,6 +772,9 @@
             updateStats();
             
             alert(`✅ Жалоба ${complaintId} ${newStatus === 'resolved' ? 'принята' : 'отклонена'}`);
+            
+            // Сохраняем изменения
+            saveComplaintsToStorage();
         }
     }
 
@@ -687,6 +800,10 @@
             
             updateUsersList();
             alert('✅ Модератор успешно добавлен!');
+            
+            // Сохраняем изменения
+            saveUsersToStorage();
+            saveCountersToStorage();
         } else {
             alert('❌ Заполните все поля!');
         }
@@ -733,6 +850,9 @@
             users = users.filter(user => user.id !== userId);
             updateUsersList();
             alert('✅ Пользователь удален!');
+            
+            // Сохраняем изменения
+            saveUsersToStorage();
         }
     }
 
@@ -804,9 +924,43 @@
         if (adminCode === 'k1ClcJ_-3c') {
             isAdminLoggedIn = true;
             alert('✅ Вы успешно вошли как администратор!');
+            
+            // Устанавливаем срок действия сессии (8 часов)
+            const expiryDate = new Date();
+            expiryDate.setHours(expiryDate.getHours() + 8);
+            localStorage.setItem('g3laziSessionExpiry', expiryDate.getTime());
+            
             toggleAdminTabs();
+            toggleLoginForms();
+            
+            // Сохраняем состояние входа
+            saveAdminStateToStorage();
         } else {
             alert('❌ Неверный код доступа!');
+        }
+    }
+
+    // Выход администратора
+    function logout() {
+        isAdminLoggedIn = false;
+        localStorage.removeItem('g3laziSessionExpiry');
+        toggleAdminTabs();
+        toggleLoginForms();
+        saveAdminStateToStorage();
+        showTab('complaint');
+    }
+
+    // Переключение форм входа/выхода
+    function toggleLoginForms() {
+        const loginForm = document.getElementById('loginForm');
+        const loggedInPanel = document.getElementById('loggedInPanel');
+        
+        if (isAdminLoggedIn) {
+            loginForm.style.display = 'none';
+            loggedInPanel.style.display = 'flex';
+        } else {
+            loginForm.style.display = 'flex';
+            loggedInPanel.style.display = 'none';
         }
     }
 
@@ -848,9 +1002,5 @@
         return roleTexts[role] || role;
     }
 </script>
-</body>
-</html>
-<!-- partial -->
-  
 </body>
 </html>
